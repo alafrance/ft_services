@@ -31,6 +31,7 @@ function launch()
     setup ftps
     setup mysql
     setup wordpress
+    setup phpmyadmin
     minikube dashboard
 }
 

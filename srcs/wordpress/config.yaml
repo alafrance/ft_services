@@ -38,3 +38,10 @@ spec:
         ports:
         - containerPort: 5050
           name: wordpress
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: "/var/www/html"          # which data will be stored
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-persistent-storage

@@ -1,10 +1,9 @@
 apk add wget
-wget http://wordpress.org/latest.tar.gz
-tar -xzvf latest.tar.gz
-rm latest.tar.gz
-mv wordpress www
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
+tar -xzvf phpMyAdmin-4.9.7-all-languages.tar.gz
+rm phpMyAdmin-4.9.7-all-languages.tar.gz
+mv phpMyAdmin-4.9.7-all-languages phpmyadmin
 mv ./nginx.conf /etc/nginx/
-mv wp-config.php /www
 adduser -D -g 'www' www
 chown -R www:www /var/lib/nginx
 chown -R www:www /www/.

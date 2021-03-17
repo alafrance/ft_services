@@ -1,17 +1,16 @@
 apiVersion: v1
-apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: phpmyadmin
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   ports:
-  - name: mysql
-    port: 3306
+  - name: phpmyadmin
+    port: 5000
     protocol: TCP
   selector:
-    run: mysql
+    run: phpmyadmin
   type: LoadBalancer
 
 ---
@@ -19,31 +18,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: phpmyadmin
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
     matchLabels:
-      run: mysql
+      run: phpmyadmin
   replicas: 1
   template:
     metadata:
       labels:
-        run: mysql
+        run: phpmyadmin
     spec:
       restartPolicy: Always
       containers:
-      - name: mysql
+      - name: phpmyadmin
         imagePullPolicy: Never
-        image: my-mysql
+        image: my-phpmyadmin
         ports:
-        - name: sql
-          containerPort: 3306
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv-claim
+        - name: phpmyadmin
+          containerPort: 5000
