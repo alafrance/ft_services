@@ -1,8 +1,6 @@
 FROM alpine:3.12
 
-COPY ./srcs/script.sh /script.sh
-
-RUN chmod +x /script.sh
+#RUN apk update && apk add mysql mysql-client openrc
 
 RUN apk -U upgrade && \
 apk add --no-cache \
@@ -11,6 +9,10 @@ rm -f /var/cache/apk/*
 
 COPY ./srcs/mariadb-server.cnf /etc/my.cnf.d/
 
-EXPOSE 3306
+COPY srcs/ .
 
-CMD sh script.sh
+
+EXPOSE 3034
+
+
+ENTRYPOINT ["sh", "script.sh"]

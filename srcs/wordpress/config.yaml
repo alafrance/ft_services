@@ -3,45 +3,52 @@ kind: Service
 metadata:
   name: wordpress
   labels:
-    run: wordpress
+    app: wordpress
   annotations:
+    metallb.universe.tf/address-pool: default
     metallb.universe.tf/allow-shared-ip: shared
 spec:
-  type: LoadBalancer
   ports:
-  - port: 5050
-    name: wordpress
-
+    - port: 5050
   selector:
-    run: wordpress
+    app: wordpress
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
+  labels:
+    app: wordpress
   annotations:
+    metallb.universe.tf/address-pool: default
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
     matchLabels:
-      run: wordpress
-  replicas: 1
+      app: wordpress
   template:
     metadata:
       labels:
-        run: wordpress
+        app: wordpress
     spec:
       containers:
-      - name: wordpress
-        image: my-wordpress
+      - image: my-wordpress
+        name: wordpress
         imagePullPolicy: Never
+        livenessProbe:
+          tcpSocket:
+            port: 5050
+          initialDelaySeconds: 60
+          periodSeconds: 4
         ports:
         - containerPort: 5050
           name: wordpress
         volumeMounts:
         - name: mysql-persistent-storage
-          mountPath: "/var/www/html"          # which data will be stored
+          mountPath: /var/www/html
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-persistent-storage
+          claimName: mysql-volume
+
