@@ -2,6 +2,7 @@ function fill_template()
 {
     sed "s/MINIKUBEIP/$IP_MINIKUBE/g" srcs/metallb/template_metallb.yaml > srcs/metallb/metallb.yaml
     sed "s/MINIKUBEIP/$IP_MINIKUBE/g" srcs/ftps/srcs/script_template.sh > srcs/ftps/srcs/script.sh
+    sed "s/MINIKUBEIP/$IP_MINIKUBE/g" srcs/wordpress/srcs/user_template.sh > srcs/wordpress/srcs/user.sh
 
 }
 
