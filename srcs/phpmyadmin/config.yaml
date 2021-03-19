@@ -39,3 +39,10 @@ spec:
         ports:
         - name: phpmyadmin
           containerPort: 5000
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-volume
