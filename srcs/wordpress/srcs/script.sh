@@ -14,5 +14,4 @@ openssl req -x509 -nodes -days 365 -subj "/C=FR/ST=FR/L=FR/O=42/CN=ft_services" 
 openrc sysinit
 rc-service nginx start
 rc-service php-fpm7 restart
-sh user.sh
 tail -f /dev/null

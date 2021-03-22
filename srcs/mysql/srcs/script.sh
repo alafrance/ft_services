@@ -8,7 +8,6 @@ rc-service mariadb start
 
 
 echo "CREATE DATABASE wordpress;" | mysql -u root
-echo "CREATE DATABASE phpmyadmin;" | mysql -u root
 echo "CREATE USER 'root'@'%' IDENTIFIED BY 'root';" | mysql -u root
 echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
@@ -17,3 +16,4 @@ rc-service mariadb restart
 pkill mysqld
 
 /usr/bin/mysqld --user=root --datadir=/var/lib/mysql
+    
