@@ -12,4 +12,4 @@ openssl req -x509 -nodes -days 365 -subj "/C=FR/ST=FR/L=FR/O=42/CN=ft_services" 
 # Starting
 openrc sysinit
 rc-service nginx start
-tail -f /dev/null
+telegraf conf

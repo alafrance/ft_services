@@ -24,16 +24,20 @@ function setup()
 
 function launch()
 {
+    export MINIKUBE_HOME=/Users/$USER/goinfre
+    export CHANGE_MINIKUBE_NONE_USER=true
     minikube delete
     minikube start --driver=virtualbox
     IP_MINIKUBE=$(minikube ip)
     fill_template
     setup_metallb
+    setup influxdb
+    setup mysql
     setup nginx
     setup ftps
-    setup mysql
     setup wordpress
     setup phpmyadmin
+    setup grafana
     minikube dashboard
 }
 

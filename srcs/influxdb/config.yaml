@@ -20,7 +20,7 @@ spec:
         app: influxdb
     spec:
       containers:
-      - image: influxdb-image
+      - image: my-influxdb
         name: influxdb
         imagePullPolicy: Never
         ports:
@@ -31,3 +31,17 @@ spec:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:
           claimName: influxdb-volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8086
+      name: influxdb
+  selector:
+    app: influxdb
