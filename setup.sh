@@ -24,8 +24,6 @@ function setup()
 
 function launch()
 {
-    export MINIKUBE_HOME=/Users/$USER/goinfre
-    export CHANGE_MINIKUBE_NONE_USER=true
     minikube delete
     minikube start --driver=virtualbox
     IP_MINIKUBE=$(minikube ip)

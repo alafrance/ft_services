@@ -31,6 +31,7 @@ spec:
       labels:
         app: mysql
     spec:
+      restartPolicy: Always
       containers:
         - image: my-mysql
           name: mysql

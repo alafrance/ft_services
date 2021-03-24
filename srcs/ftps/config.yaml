@@ -41,6 +41,7 @@ spec:
       labels:
         run: ftps
     spec:
+      restartPolicy: Always
       containers:
       - name: ftps
         image: my-ftps

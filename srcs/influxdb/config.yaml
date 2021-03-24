@@ -19,6 +19,7 @@ spec:
       labels:
         app: influxdb
     spec:
+      restartPolicy: Always
       containers:
       - image: my-influxdb
         name: influxdb
